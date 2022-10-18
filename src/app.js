@@ -1,4 +1,3 @@
-// component Category Row
 function ProductCategoryRow({ category }) {
     return (
         <tr>
@@ -6,6 +5,78 @@ function ProductCategoryRow({ category }) {
                 {category}
             </th>
         </tr>
+    );
+}
+
+function ProductRow({ product }) {
+    const name = product.stocked ? product.name :
+        <span style={{ color: "red" }}>
+            {product.name}
+        </span>;
+
+    return (
+        <tr>
+            <td>{name}</td>
+            <td>{product.price}</td>
+        </tr>
+    );
+}
+
+function ProductTable({ products }) {
+    const rows = [];
+    let lastCategory = null;
+
+    products.forEach((product) => {
+        if (product.category !== lastCategory) {
+            rows.push(
+                <ProductCategoryRow
+                    category={product.category}
+                    key={product.category}
+                />
+            );
+        }
+
+        rows.push(
+            <ProductRow
+                product={product}
+                key={product.name}
+            />
+        );
+        lastCategory = product.category;
+    });
+
+    return (
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+
+            <tbody>{rows}</tbody>
+        </table>
+    );
+}
+function SearchBar() {
+    return (
+        <form>
+            <input type="text" placeholder="Search..." />
+            <label>
+                <input type="checkbox" />
+                {" "}
+                Only show products in stock
+            </label>
+        </form>
+    );
+}
+
+function FilterableProductTable({ products }) {
+    return (
+        <div>
+            <SearchBar />
+            <ProductTable products={products} />
+        </div>
     );
 }
 
@@ -18,14 +89,12 @@ const products = [
     { category: "Vegetables", price: "$1", stocked: true, name: "Peas" }
 ];
 
-function App() {
-    return (
-        <div className="app"></div>
-    );
+export default function App() {
+    return <FilterableProductTable products={products} />;
 }
 
 
-
+// connection to HTML
 const rootNode = document.getElementById('reactRootNode');
 const root = ReactDOM.createRoot(rootNode);
 root.render(<App />);
