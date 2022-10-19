@@ -58,6 +58,7 @@ function ProductTable({ products }) {
         </table>
     );
 }
+
 function SearchBar() {
     return (
         <form>
@@ -80,7 +81,7 @@ function FilterableProductTable({ products }) {
     );
 }
 
-const products = [
+const myProducts = [
     { category: "Fruits", price: "$1", stocked: true, name: "Apple" },
     { category: "Fruits", price: "$1", stocked: true, name: "Dragonfruit" },
     { category: "Fruits", price: "$2", stocked: false, name: "Passionfruit" },
@@ -90,7 +91,7 @@ const products = [
 ];
 
 export default function App() {
-    return <FilterableProductTable products={products} />;
+    return <FilterableProductTable products={myProducts} />;
 }
 
 
@@ -98,3 +99,17 @@ export default function App() {
 const rootNode = document.getElementById('reactRootNode');
 const root = ReactDOM.createRoot(rootNode);
 root.render(<App />);
+
+
+// The most important principle for structuring state is to keep it DRY (Don’t Repeat Yourself)
+// state lets your users change your UI
+// points to guide you thro when a component doesn't need to use state
+    // Does it remain unchanged over time ? If so, it isn’t state.
+    // Is it passed in from a parent via props ? If so, it isn’t state.
+    // Can you compute it based on existing state or props in your component ? If so, it definitely isn’t state!
+
+// PROPS vs STATE
+// Props are like arguments you pass to a function
+// they let a parent component pass data to a child component and customize its appearance
+// State is like a component’s memory
+//  It lets a component keep track of some information and change it in response to interactions
