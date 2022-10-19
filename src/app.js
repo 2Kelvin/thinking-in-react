@@ -113,3 +113,6 @@ root.render(<App />);
 // they let a parent component pass data to a child component and customize its appearance
 // State is like a component’s memory
 //  It lets a component keep track of some information and change it in response to interactions
+// Props and state are different, but they work together
+// A parent component will often keep some information in state (so that it can change it)
+// ...and pass it down to child components as their props
