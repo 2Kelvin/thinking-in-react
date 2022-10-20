@@ -1,32 +1,56 @@
-function ProductCategoryRow({ category }) {
+function FilterableProductTable({ products }) {
+    const [filterSearchText, setfilterSearchText] = React.useState("");
+    const [inStock, setInStock] = React.useState(false);
+
     return (
-        <tr>
-            <th colSpan="2">
-                {category}
-            </th>
-        </tr>
+        <div>
+            <SearchBar
+                filterSearchText={filterSearchText}
+                inStock={inStock}
+            />
+
+            <ProductTable
+                products={products}
+                filterSearchText={filterSearchText}
+                inStock={inStock}
+            />
+        </div>
     );
 }
 
-function ProductRow({ product }) {
-    const name = product.stocked ? product.name :
-        <span style={{ color: "red" }}>
-            {product.name}
-        </span>;
-
+function SearchBar({ filterSearchText, inStock }) {
     return (
-        <tr>
-            <td>{name}</td>
-            <td>{product.price}</td>
-        </tr>
+        <form>
+            <input
+                type="text"
+                value={filterSearchText}
+                placeholder="Search..."
+            />
+            <label>
+                <input
+                    checked={inStock}
+                    type="checkbox"
+                />
+                {" "}
+                Only show products in stock
+            </label>
+        </form>
     );
 }
 
-function ProductTable({ products }) {
+function ProductTable({ products, filterSearchText, inStock }) {
     const rows = [];
     let lastCategory = null;
 
     products.forEach((product) => {
+        if (product.name.toLowerCase().indexOf(filterSearchText.toLowerCase()) === -1) {
+            return;
+        }
+
+        if (inStock && !product.stocked) {
+            return;
+        }
+
         if (product.category !== lastCategory) {
             rows.push(
                 <ProductCategoryRow
@@ -59,25 +83,27 @@ function ProductTable({ products }) {
     );
 }
 
-function SearchBar() {
+function ProductCategoryRow({ category }) {
     return (
-        <form>
-            <input type="text" placeholder="Search..." />
-            <label>
-                <input type="checkbox" />
-                {" "}
-                Only show products in stock
-            </label>
-        </form>
+        <tr>
+            <th colSpan="2">
+                {category}
+            </th>
+        </tr>
     );
 }
 
-function FilterableProductTable({ products }) {
+function ProductRow({ product }) {
+    const name = product.stocked ? product.name :
+        <span style={{ color: "red" }}>
+            {product.name}
+        </span>;
+
     return (
-        <div>
-            <SearchBar />
-            <ProductTable products={products} />
-        </div>
+        <tr>
+            <td>{name}</td>
+            <td>{product.price}</td>
+        </tr>
     );
 }
 
@@ -116,3 +142,12 @@ root.render(<App />);
 // Props and state are different, but they work together
 // A parent component will often keep some information in state (so that it can change it)
 // ...and pass it down to child components as their props
+
+//  React uses a one-way data flow
+// ...passing data down the component hierarchy from parent to child component
+// Often, you can put state directly into state-using components' common parent
+// You can also put state into some component above their common parent
+// for components that don't make sense to own state, create a new component solely for holding the state 
+// ...and add it somewhere in the hierarchy above the common parent component
+
+// Hooks let you “hook into” a component’s render cycle
