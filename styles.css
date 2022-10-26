@@ -16,3 +16,7 @@ td {
     border-collapse: collapse;
     text-align: center;
 }
+
+form {
+    margin-bottom: 0.5em;
+}
