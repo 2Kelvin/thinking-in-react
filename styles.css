@@ -1,0 +1,18 @@
+.app {
+    display: grid;
+    place-content: center;
+}
+
+.whole_table {
+    display: grid;
+    place-content: center;
+    margin-top: 2em;
+}
+
+table,
+th,
+td {
+    border: 1px solid #333;
+    border-collapse: collapse;
+    text-align: center;
+}

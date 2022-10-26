@@ -3,7 +3,7 @@ function FilterableProductTable({ products }) {
     const [inStock, setInStock] = React.useState(false);
 
     return (
-        <div>
+        <div className="whole_table">
             <SearchBar
                 filterSearchText={filterSearchText}
                 inStock={inStock}
@@ -121,7 +121,11 @@ const myProducts = [
 ];
 
 export default function App() {
-    return <FilterableProductTable products={myProducts} />;
+    return (
+        <div className="app">
+            <FilterableProductTable products={myProducts} />
+        </div>
+    );
 }
 
 

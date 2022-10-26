@@ -15,7 +15,7 @@ function FilterableProductTable(_ref) {
 
     return React.createElement(
         "div",
-        null,
+        { className: "whole_table" },
         React.createElement(SearchBar, {
             filterSearchText: filterSearchText,
             inStock: inStock,
@@ -165,7 +165,11 @@ function ProductRow(_ref5) {
 var myProducts = [{ category: "Fruits", price: "$1", stocked: true, name: "Apple" }, { category: "Fruits", price: "$1", stocked: true, name: "Dragonfruit" }, { category: "Fruits", price: "$2", stocked: false, name: "Passionfruit" }, { category: "Vegetables", price: "$2", stocked: true, name: "Spinach" }, { category: "Vegetables", price: "$4", stocked: false, name: "Pumpkin" }, { category: "Vegetables", price: "$1", stocked: true, name: "Peas" }];
 
 export default function App() {
-    return React.createElement(FilterableProductTable, { products: myProducts });
+    return React.createElement(
+        "div",
+        { className: "app" },
+        React.createElement(FilterableProductTable, { products: myProducts })
+    );
 }
 
 // connection to HTML
