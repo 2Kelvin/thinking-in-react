@@ -1,5 +1,7 @@
 # thinking-in-react
 
+![tabl](https://user-images.githubusercontent.com/85868026/198066311-2405cd82-3b98-4170-8fcb-c84797fb5d1d.png)
+
 In this read, I understood how to use `state` and pass `props` from the in a react parent-child component hierachy.
 I also learnt how to set state precisely on input elements through their `onChange` function.
 
